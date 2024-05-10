@@ -29,7 +29,7 @@ class ServicioProyectos {
             let result = await this.DB.Open(sql, []);
     
             if (result && result.length > 0) {
-                // El resultado es válido, no necesitas mapearlo
+                
                 return result.map(propiedad => ({
                     "Id_Proyecto": propiedad.id_proyecto,
                     "Lider_Proyecto": propiedad.lider_proyecto,

@@ -14,9 +14,7 @@ module.exports = function (servicio) {
 
          console.log(Lider_Proyecto);
 
-        // if (Nombre.trim()=='' || Precio==0 || ValorDia==0){
-           
-          //  return res.status(400).json('VERIFIQUE CAMPOS');
+      
         // }
 
          const Answer = await servicio.addProyecto(Lider_Proyecto, Nombre,Fecha_Inicio,Fecha_Finalizacion,Descripcion)

@@ -28,42 +28,35 @@ const app = express()
 app.use(cors());
 
 //Importancion de modulo
-const ControllerMarcas=require('./Controllers/GestionMarca');
-const ControllerClientes=require('./Controllers/GestionCliente');
-const ControllerTipoVehiculo=require('./Controllers/GestionTipoVehiculo');
+const ControllerPerfiles=require('./Controllers/GestionPerfiles');
+const ControllerDetalleProyecto=require('./Controllers/GestionDetalleProyecto');
+const ControllerRol=require('./Controllers/GestionRol');
 const ControllerProyecto=require('./Controllers/GestionProyecto');
-const ControllerVehiculo=require('./Controllers/GestionVehiculo');
-const ControllerReserva=require('./Controllers/GestionReserva');
-const ControllerEmpleado=require('./Controllers/GestionEmpleado');
-const ControllerCargo=require('./Controllers/GestionCargos');
-const ControllerAlquiler=require('./Controllers/GestionAlquiler');
+const ControllerTareas=require('./Controllers/GestionTareas');
+const ControllerUsuarios=require('./Controllers/Usuarios');
+
 
 
 
 
 
 //Instancias de los modulos
-const serviciomarcaI=new ControllerMarcas(DB);
-const ServicioClienteI=new ControllerClientes(DB);
-const servicioTipoVehiculoI=new ControllerTipoVehiculo(DB);
+const serviciomPerfilesI=new ControllerPerfiles(DB);
+const ServicioDetalleProyectoI=new ControllerDetalleProyecto(DB);
+const servicioRolI=new ControllerRol(DB);
 const servicioProyectoI=new ControllerProyecto(DB);
-const servicioVehiculoI=new ControllerVehiculo(DB);
-const servicioReservaI=new ControllerReserva(DB);
-const servicioEmpleadoI=new ControllerEmpleado(DB);
-const servicioAlquilerI=new ControllerAlquiler(DB);
-const servicioCargoI=new ControllerCargo(DB);
+const servicioTareasI=new ControllerTareas(DB);
+const servicioUsuariosI=new ControllerUsuarios(DB);
+
 
 
 //Routes (API)
-const MarcasRoutes= require('./routes/GestionMarcasRoutes')(serviciomarcaI); //Se le pasa el servicio con su base
-const ClienteRoutes=require('./routes/GestionClientesRoutes')(ServicioClienteI);
-const TipoVehiculoRoutes=require('./routes/GestionTipoVehiculoRoutes')(servicioTipoVehiculoI);
+const PerfilesRoutes= require('./routes/GestionPerfilesRoutes')(serviciomPerfilesI); //Se le pasa el servicio con su base
+const DetalleProyectoRoutes=require('./routes/GestionDetalleProyectoRoutes')(ServicioDetalleProyectoI);
+const RolRoutes=require('./routes/GestionRolesRoutes')(servicioRolI);
 const ProyectoRoutes=require('./routes/GestionProyectosRoutes')(servicioProyectoI);
-const VehiculoRoutes=require('./routes/GestionVehiculosRoutes')(servicioVehiculoI);
-const ReservaRoutes=require('./routes/GestionReservasRoutes')(servicioReservaI);
-const EmpleadoRoutes=require('./routes/GestionEmpleadosRoutes')(servicioEmpleadoI);
-const AlquilerRoutes=require('./routes/GestionAlquileresRoutes')(servicioAlquilerI);
-const CargoRoutes=require('./routes/GestionCargosRoutes')(servicioCargoI);
+const TareasRoutes=require('./routes/GestionTareasRoutes')(servicioTareasI);
+const UsuariosRoutes=require('./routes/GestionUsuariosRoutes')(servicioUsuariosI);
 
 
 
@@ -83,15 +76,13 @@ app.use('/public',express.static(path.join(__dirname,'public')))
 
 
 //ROUTES (Ejecucion)
-app.use(MarcasRoutes);
-app.use(ClienteRoutes);
-app.use(TipoVehiculoRoutes);
+app.use(PerfilesRoutes);
+app.use(DetalleProyectoRoutes);
+app.use(RolRoutes);
 app.use(ProyectoRoutes);
-app.use(VehiculoRoutes);
-app.use(ReservaRoutes);
-app.use(EmpleadoRoutes);
-app.use(AlquilerRoutes);
-app.use(CargoRoutes);
+app.use(TareasRoutes);
+app.use(UsuariosRoutes);
+
 
 //Directorio Publico
 app.use(express.static('public'))
