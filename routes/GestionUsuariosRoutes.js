@@ -10,13 +10,13 @@ module.exports = function (servicio) {
 
       try {
 
-         const { Id_Usuario,Email,Clave,Id_rol} = req.body;
+         const { Email,Clave,Id_rol} = req.body;
 
          
 
         
 
-         const Usuarios = await servicio.addUsuarios(Id_Usuario,Email,Clave,Id_rol);
+         const Usuarios = await servicio.addUsuarios(Email,Clave,Id_rol);
 
          
 

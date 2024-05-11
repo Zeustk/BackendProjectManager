@@ -5,15 +5,15 @@ class ServiciosUsuarios {
     }
 
 
-    async addUsuarios(Id_Usuario,Email,Clave,Id_rol) {
+    async addUsuario(Email,Clave,Id_rol) {
         try {
 
             const Disponible="SI";
 
 
-            const sql = "INSERT INTO Usuarios(Id_Usuario,Email,Clave,Id_rol) VALUES (NEXTVAL('secuenciaproyectos'), ?,?, ?, ?, ?,?)";
+            const sql = "INSERT INTO usuarios(Id_Usuario,Email,Clave,Id_rol,Disponible) VALUES (NEXTVAL('secuenciaproyectos'), ?,?, ?, ?)";
     
-            await this.DB.Open(sql, [Id_Usuario,Email,Clave,Id_rol,Disponible]);
+            await this.DB.Open(sql, [Email,Clave,Id_rol,Disponible]);
     
             return 'Guardado Exitosamente';
         } catch (err) {

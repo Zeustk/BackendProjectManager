@@ -58,10 +58,7 @@ class ServicioTareas {
 
         try { 
             
-            /* console.log(Id);
-            console.log(Nombre);
-            console.log(Precio);
-            console.log(ValorDia); */
+            
             
             const sql = "update Tareas set Nombre=?,Fecha_Inicio=?,Fecha_Finalizacion=?,Descripcion=?,Porcentajetarea=? where Id_Tarea=?";
 
