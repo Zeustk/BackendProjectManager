@@ -93,4 +93,4 @@ class ServicioPerfiles {
 
 }
 
-module.exports = ServicioRol;
+module.exports = ServicioPerfiles;

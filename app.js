@@ -33,7 +33,7 @@ const ControllerDetalleProyecto=require('./Controllers/GestionDetalleProyecto');
 const ControllerRol=require('./Controllers/GestionRol');
 const ControllerProyecto=require('./Controllers/GestionProyecto');
 const ControllerTareas=require('./Controllers/GestionTareas');
-const ControllerUsuarios=require('./Controllers/Usuarios');
+const ControllerUsuarios=require('./Controllers/GestionUsuarios');
 
 
 
