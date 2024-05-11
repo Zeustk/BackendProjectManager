@@ -5,7 +5,7 @@ const router = express.Router();
 
 module.exports = function (servicio) {
 
-   router.post('/api/addUsuarios', async (req, res) => {
+   router.post('/api/addUsuario', async (req, res) => {
 
 
       try {
@@ -14,8 +14,7 @@ module.exports = function (servicio) {
 
          
 
-        
-
+      
          const Usuarios = await servicio.addUsuarios(Email,Clave,Id_rol);
 
          
