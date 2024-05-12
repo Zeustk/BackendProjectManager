@@ -89,6 +89,24 @@ class ServiciosUsuarios {
 
     }
 
+    async  VerificarCorreoExistente(Email) {
+        try {
+            const sql = "SELECT * FROM usuarios WHERE Email = ?";
+            const result = await this.DB.Open(sql, [Email]);
+    
+            if (result && result.length > 0) {
+                const count = result[0].count;
+                return count > 0;
+            } else {
+                return false; 
+            }
+        } catch (err) {
+            
+            throw new Error('Error al verificar el correo en la base de datos');
+        }
+    }
+    
+
 
 }
 

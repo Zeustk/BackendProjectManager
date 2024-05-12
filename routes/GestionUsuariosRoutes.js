@@ -34,7 +34,21 @@ module.exports = function (servicio) {
       const Usuarios = await servicio.getUsuarios();
 
       res.json(Usuarios);
-   })
+   });
+
+   router.get('/api/getUsuarioBase',async(req,res)=>{
+       
+       try {
+         
+         const {Email}=req.body;
+         const UsuarioVerificar=await servicio.VerificarCorreoExistente(Email);
+          
+         res.status(200).json(UsuarioVerificar);
+         
+       } catch (error) {
+         res.status(404).json(error);
+       }
+   });
 
 
    router.put('/api/UpdateUsuarios', async (req, res) => {
