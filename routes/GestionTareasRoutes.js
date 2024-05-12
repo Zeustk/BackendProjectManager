@@ -10,13 +10,18 @@ module.exports = function (servicio) {
 
       try {
 
-         const { Id_Tarea,Nombre,Fecha_Inicio,Fecha_Finalizacion,Descripcion,Porcentajetarea,Id_Proyecto,Id_usuario} = req.body;
+         const { Nombre,Fecha_Inicio,Fecha_Finalizacion,Descripcion,PorcentajeTarea,Id_Proyecto,Id_Usuario} = req.body;
 
-         console.log(Lider_Proyecto);
-
+        console.log(Nombre);
+        console.log(Fecha_Inicio);
+        console.log(Fecha_Finalizacion);
+        console.log(Descripcion);
+        console.log(PorcentajeTarea);
+        console.log(Id_Proyecto);
+        console.log(Id_Usuario);
         
 
-         const Tareas = await servicio.addTarea(Id_Tarea,Nombre,Fecha_Inicio,Fecha_Finalizacion,Descripcion,Porcentajetarea,Id_Proyecto,Id_usuario);
+         const Tareas = await servicio.addTarea(Nombre,Fecha_Inicio,Fecha_Finalizacion,Descripcion,PorcentajeTarea,Id_Proyecto,Id_Usuario);
 
          
 
