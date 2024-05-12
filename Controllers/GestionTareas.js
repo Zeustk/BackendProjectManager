@@ -5,15 +5,15 @@ class ServicioTareas {
     }
 
 
-    async addTarea(Id_Tarea,Nombre,Fecha_Inicio,Fecha_Finalizacion,Descripcion,Porcentajetarea,Id_Proyecto,Id_usuario) {
+    async addTarea(Nombre,Fecha_Inicio,Fecha_Finalizacion,Descripcion,Porcentajetarea,Id_Proyecto,Id_usuario) {
         try {
 
             const Disponible="SI";
 
 
-            const sql = "INSERT INTO TAREAS(Id_Proyecto, Lider_Proyecto, Nombre, Fecha_Inicio, Fecha_Finalizacion,Descripcion,Disponible) VALUES (NEXTVAL('secuenciaproyectos'), ?,?, ?, ?, ?,?)";
+            const sql = "INSERT INTO TAREAS(Id_Tarea, Nombre, Fecha_Inicio, Fecha_Finalizacion,Descripcion,PorcentajeTarea,Id_Proyecto,Id_Usuario,Disponible) VALUES (NEXTVAL('secuenciatareas'), ?,?, ?, ?, ?,?,?,?)";
     
-            await this.DB.Open(sql, [Id_Tarea, Nombre, Fecha_Inicio, Fecha_Finalizacion,Descripcion,Porcentajetarea,Id_Proyecto,Id_usuario,Disponible]);
+            await this.DB.Open(sql, [Nombre, Fecha_Inicio, Fecha_Finalizacion,Descripcion,Porcentajetarea,Id_Proyecto,Id_usuario,Disponible]);
     
             return 'Guardado Exitosamente';
         } catch (err) {
