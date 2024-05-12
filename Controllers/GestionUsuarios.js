@@ -93,7 +93,7 @@ class ServiciosUsuarios {
         try {
             
             
-            const sql = "SELECT * FROM usuarios WHERE Email = ?  Clave = ?";
+            const sql = "SELECT * FROM usuarios WHERE Email = ? and  Clave = ?";
             const result = await this.DB.Open(sql, [Email,Clave]);
     
             if (result && result.length > 0) {

@@ -42,6 +42,8 @@ module.exports = function (servicio) {
        try {
             
          const {Email,Clave}=req.body;
+         
+         console.log(Clave);
          const UsuarioVerificar=await servicio.VerificarCorreoExistente(Email,Clave);
          
          res.status(200).json(UsuarioVerificar);
