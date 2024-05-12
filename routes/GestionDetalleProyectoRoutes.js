@@ -10,13 +10,13 @@ module.exports = function (servicio) {
 
       try {
 
-         const { Id_Detalle,Id_Usuario,Id_Proyecto,PorcentajeProyecto} = req.body;
+         const {Id_Usuario,PorcentajeProyecto} = req.body;
 
          
 
         
 
-         const Detalles = await servicio.addDetalleproyecto(Id_Detalle,Id_Usuario,Id_Proyecto,PorcentajeProyecto);
+         const Detalles = await servicio.addDetalleproyecto(Id_Usuario,PorcentajeProyecto);
 
          
 
