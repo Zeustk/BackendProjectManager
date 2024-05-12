@@ -31,10 +31,10 @@ class ServiciosUsuarios {
             if (result && result.length > 0) {
                 
                 return result.map(propiedad => ({
-                    "Id_Usuario": propiedad.Id_Usuario,
-                    "Email": propiedad.Email,
-                    "Clave": propiedad.Clave,
-                    "Id_rol": propiedad.Id_rol
+                    "Id_Usuario": propiedad.id_usuario,
+                    "Email": propiedad.email,
+                    "Clave": propiedad.clave,
+                    "Id_rol": propiedad.id_rol
                 
                 }));
             } else {
