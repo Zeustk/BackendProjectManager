@@ -36,13 +36,14 @@ module.exports = function (servicio) {
       res.json(Usuarios);
    });
 
-   router.get('/api/getUsuarioBase',async(req,res)=>{
+   router.post('/api/getUsuarioBase',async(req,res)=>{
        
+      
        try {
+            
+         const {Email,Clave}=req.body;
+         const UsuarioVerificar=await servicio.VerificarCorreoExistente(Email,Clave);
          
-         const {Email}=req.body;
-         const UsuarioVerificar=await servicio.VerificarCorreoExistente(Email);
-          
          res.status(200).json(UsuarioVerificar);
          
        } catch (error) {

@@ -89,14 +89,16 @@ class ServiciosUsuarios {
 
     }
 
-    async  VerificarCorreoExistente(Email) {
+    async  VerificarCorreoExistente(Email,Clave) {
         try {
-            const sql = "SELECT * FROM usuarios WHERE Email = ?";
-            const result = await this.DB.Open(sql, [Email]);
+            
+            
+            const sql = "SELECT * FROM usuarios WHERE Email = ?  Clave = ?";
+            const result = await this.DB.Open(sql, [Email,Clave]);
     
             if (result && result.length > 0) {
-                const count = result[0].count;
-                return count > 0;
+                
+                return true;
             } else {
                 return false; 
             }
