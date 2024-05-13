@@ -37,7 +37,7 @@ module.exports = function (servicio) {
 
    router.get('/api/getTarea', async (req, res) => {
 
-      const Tareas = await servicio.getTarea();
+      const Tareas = await servicio.getTareas();
 
       res.json(Tareas);
    })

@@ -31,14 +31,15 @@ class ServicioTareas {
             if (result && result.length > 0) {
                 
                 return result.map(propiedad => ({
-                    "Id_Tarea": propiedad.Id_Tarea,
-                    "Nombre": propiedad.Nombre,
-                    "Fecha_Inicio": propiedad.Fecha_Inicio,
-                    "Fecha_Finalizacion": propiedad.Fecha_Finalizacion,
-                    "Descripcion": propiedad.Descripcion,
-                    "Porcentajetarea":propiedad.Porcentajetarea,
-                    "Id_Proyecto":propiedad.Id_Proyecto,
-                    "Id_usuario":propiedad.Id_usuario,
+                    "Id_Tarea": propiedad.id_tarea,
+                    "Nombre": propiedad.nombre,
+                    "Fecha_Inicio": propiedad.fecha_inicio,
+                    "Fecha_Finalizacion": propiedad.fecha_finalizacion,
+                    "Descripcion": propiedad.descripcion,
+                    "PorcentajeTarea":propiedad.porcentajetarea,
+                    "Id_Proyecto":propiedad.id_proyecto,
+                    "Id_usuario":propiedad.id_usuario,
+                    "Disponible":propiedad.disponible
                     
                 }));
             } else {
@@ -48,7 +49,7 @@ class ServicioTareas {
         } catch (err) {
             
             console.error(err);
-            return 'Error de consulta';
+            return 'Error de consulta ' +err;
         }
     }
     
