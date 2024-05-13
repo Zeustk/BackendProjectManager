@@ -23,10 +23,10 @@ class ServicioTareas {
     }
     
 
-    async getTareas() {
+    async getTareas(id_Usuario,id_Proyecto) {
         try {
-            const sql = "select * from Tareas";
-            let result = await this.DB.Open(sql, []);
+            const sql = "select *from tareas where id_proyecto=? and id_usuario=?";
+            let result = await this.DB.Open(sql, [id_Proyecto,id_Usuario]);
     
             if (result && result.length > 0) {
                 

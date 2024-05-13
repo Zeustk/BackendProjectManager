@@ -23,10 +23,12 @@ class ServicioProyectos {
     }
     
 
-    async getProyecto() {
+    async getProyecto(id_usuario) {
+        
         try {
-            const sql = "select * from Proyectos";
-            let result = await this.DB.Open(sql, []);
+         
+            const sql = "SELECT p.* FROM proyectos p LEFT JOIN detalleproyectousuarios t ON p.id_proyecto = t.id_proyecto where t.id_usuario = ?";
+            let result = await this.DB.Open(sql, [id_usuario]);
     
             if (result && result.length > 0) {
                 

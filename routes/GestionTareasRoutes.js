@@ -35,9 +35,13 @@ module.exports = function (servicio) {
 
    })
 
-   router.get('/api/getTarea', async (req, res) => {
+   router.get('/api/getTarea/:id_Proyecto/:id_Usuario', async (req, res) => {
 
-      const Tareas = await servicio.getTareas();
+      const id_Usuario = req.params.id_Usuario;
+
+      const id_Proyecto = req.params.id_Proyecto;
+
+      const Tareas = await servicio.getTareas(id_Usuario,id_Proyecto);
 
       res.json(Tareas);
    })

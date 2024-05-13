@@ -31,6 +31,8 @@ module.exports = function (servicio) {
 
    router.get('/api/getUsuarios', async (req, res) => {
 
+
+
       const Usuarios = await servicio.getUsuarios();
 
       res.json(Usuarios);
@@ -73,6 +75,23 @@ module.exports = function (servicio) {
 
       res.json(DelUsuario);
    })
+
+   router.post('/api/getUsuarioConId',async(req,res)=>{
+       
+      
+      try {
+           
+        const {Email,Clave}=req.body;
+        
+        console.log(Clave);
+        const UsuarioVerificar=await servicio.getUsuarioConId(Email,Clave);
+        
+        res.status(200).json(UsuarioVerificar);
+        
+      } catch (error) {
+        res.status(404).json(error);
+      }
+  });
 
    return router;
 }

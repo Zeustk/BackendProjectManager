@@ -107,6 +107,28 @@ class ServiciosUsuarios {
             throw new Error('Error al verificar el correo en la base de datos');
         }
     }
+
+    async getUsuarioConId(Email, Clave) {
+        try {
+            const sql = "SELECT * FROM usuarios WHERE Email = ? and Clave = ?";
+            let result = await this.DB.Open(sql, [Email, Clave]);
+    
+            if (result && result.length > 0) {
+                return {
+                    "Id_Usuario": result[0].id_usuario,
+                    "Email": result[0].email,
+                    "Clave": result[0].clave,
+                    "Id_rol": result[0].id_rol
+                };
+            } else {
+                return null; // No se encontraron registros
+            }
+        } catch (err) {
+            console.error(err);
+            return 'Error de consulta';
+        }
+    }
+    
     
 
 
