@@ -5,15 +5,15 @@ class ServicioTareas {
     }
 
 
-    async addTarea(Nombre,Fecha_Inicio,Fecha_Finalizacion,Descripcion,Porcentajetarea,Id_Proyecto,Id_usuario) {
+    async addTarea(Nombre,Fecha_Inicio,Fecha_Finalizacion,Descripcion,Porcentajetarea,Id_Proyecto,Id_usuario,urlPdf) {
         try {
 
             const Disponible="SI";
 
 
-            const sql = "INSERT INTO TAREAS(Id_Tarea, Nombre, Fecha_Inicio, Fecha_Finalizacion,Descripcion,PorcentajeTarea,Id_Proyecto,Id_Usuario,Disponible) VALUES (NEXTVAL('secuenciatareas'), ?,?, ?, ?, ?,?,?,?)";
+            const sql = "INSERT INTO TAREAS(Id_Tarea, Nombre, Fecha_Inicio, Fecha_Finalizacion,Descripcion,PorcentajeTarea,Id_Proyecto,Id_Usuario,Disponible,urlPdf) VALUES (NEXTVAL('secuenciatareas'), ?,?, ?, ?, ?,?,?,?,?)";
     
-            await this.DB.Open(sql, [Nombre, Fecha_Inicio, Fecha_Finalizacion,Descripcion,Porcentajetarea,Id_Proyecto,Id_usuario,Disponible]);
+            await this.DB.Open(sql, [Nombre, Fecha_Inicio, Fecha_Finalizacion,Descripcion,Porcentajetarea,Id_Proyecto,Id_usuario,Disponible,urlPdf]);
     
             return 'Guardado Exitosamente';
         } catch (err) {
@@ -39,7 +39,8 @@ class ServicioTareas {
                     "PorcentajeTarea":propiedad.porcentajetarea,
                     "Id_Proyecto":propiedad.id_proyecto,
                     "Id_usuario":propiedad.id_usuario,
-                    "Disponible":propiedad.disponible
+                    "Disponible":propiedad.disponible,
+                    "urlPdf":propiedad.urlpdf
                     
                 }));
             } else {
