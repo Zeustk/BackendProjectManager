@@ -11,9 +11,9 @@ class ServicioTareas {
             const Disponible="SI";
 
 
-            const sql = "INSERT INTO TAREAS(Id_Tarea, Nombre, Fecha_Inicio, Fecha_Finalizacion,Descripcion,PorcentajeTarea,Id_Proyecto,Id_Usuario,Disponible) VALUES (NEXTVAL('secuenciatareas'), ?,?, ?, ?, ?,?,?,?)";
+            const sql = "INSERT INTO TAREAS(Id_Tarea, Nombre, Fecha_Inicio, Fecha_Finalizacion,Descripcion,PorcentajeTarea,Id_Proyecto,Id_Usuario,Disponible) VALUES (NEXTVAL('secuenciatareas'), ?,?, ?, ?, ?,?,?)";
     
-            await this.DB.Open(sql, [Nombre, Fecha_Inicio, Fecha_Finalizacion,Descripcion,Porcentajetarea,Id_Proyecto,Id_usuario,Disponible]);
+            await this.DB.Open(sql, [Nombre, Fecha_Inicio, Fecha_Finalizacion,Descripcion,Porcentajetarea,Id_Proyecto,Id_usuario,Disponible,Urlpdf]);
     
             return 'Guardado Exitosamente';
         } catch (err) {

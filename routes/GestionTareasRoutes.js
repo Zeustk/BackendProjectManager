@@ -19,7 +19,7 @@ module.exports = function (servicio) {
         console.log(PorcentajeTarea);
         console.log(Id_Proyecto);
         console.log(Id_Usuario);
-        
+        console.log(Urlpdf);
 
          const Tareas = await servicio.addTarea(Nombre,Fecha_Inicio,Fecha_Finalizacion,Descripcion,PorcentajeTarea,Id_Proyecto,Id_Usuario);
 
