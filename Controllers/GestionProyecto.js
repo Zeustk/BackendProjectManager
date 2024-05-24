@@ -27,7 +27,8 @@ class ServicioProyectos {
         
         try {
          
-            const sql = "SELECT p.* FROM proyectos p LEFT JOIN detalleproyectousuarios t ON p.id_proyecto = t.id_proyecto where t.id_usuario = ?";
+            const sql = "SELECT p.* FROM proyectos p LEFT JOIN detalleproyectousuarios t ON p.id_proyecto = t.id_proyecto where t.id_usuario = ? AND Disponible= 'SI' ";
+
             let result = await this.DB.Open(sql, [id_usuario]);
     
             if (result && result.length > 0) {
