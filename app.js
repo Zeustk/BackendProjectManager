@@ -6,7 +6,6 @@ const path = require('path');
 const fs = require('fs');
 const DB = require('./db');
 const morgan = require("morgan");
-const multer = require('multer'); // Añadir multer para manejar la carga de archivos
 require('dotenv').config(); // TOMA LA CONFIGURACION DE EL ARCHIVO .ENV
 
 // Se crea el servidor, el servidor es app
@@ -31,24 +30,6 @@ const servicioProyectoI = new ControllerProyecto(DB);
 const servicioTareasI = new ControllerTareas(DB);
 const servicioUsuariosI = new ControllerUsuarios(DB);
 
-// Configuración de multer para almacenar archivos en una carpeta específica
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        const uploadPath = path.join(__dirname, 'pdfTareas'); // Ruta relativa del directorio raíz
-        if (!fs.existsSync(uploadPath)) {
-            fs.mkdirSync(uploadPath);
-        }
-        cb(null, uploadPath);
-    },
-    filename: (req, file, cb) => {
-        cb(null, Date.now() + path.extname(file.originalname));
-    }
-});
-
-const upload = multer({ storage });
-
-// Exportar multer para usarlo en el archivo de rutas
-module.exports = upload;
 
 // Routes (API)
 const PerfilesRoutes = require('./routes/GestionPerfilesRoutes')(serviciomPerfilesI); // Se le pasa el servicio con su base
@@ -78,8 +59,7 @@ app.use(ProyectoRoutes);
 app.use(TareasRoutes);
 app.use(UsuariosRoutes);
 
-// Servir archivos estáticos desde la carpeta 'pdfTareas'
-app.use('/pdfTareas', express.static(path.join(__dirname, 'pdfTareas')));
+
 
 // Directorio Publico
 app.use(express.static('public'));

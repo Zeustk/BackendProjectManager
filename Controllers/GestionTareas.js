@@ -12,8 +12,12 @@ class ServicioTareas {
 
             const Disponible="SI";
 
+            
 
             const sql = "INSERT INTO TAREAS(Id_Tarea, Nombre, Fecha_Inicio, Fecha_Finalizacion,Descripcion,PorcentajeTarea,Id_Proyecto,Id_Usuario,Disponible,urlPdf) VALUES (NEXTVAL('secuenciatareas'), ?,?, ?, ?, ?,?,?,?,?)";
+
+            console.log('hola');
+
     
             await this.DB.Open(sql, [Nombre, Fecha_Inicio, Fecha_Finalizacion,Descripcion,Porcentajetarea,Id_Proyecto,Id_usuario,Disponible,urlPdf]);
     
@@ -28,6 +32,7 @@ class ServicioTareas {
     async getTareas(id_Usuario,id_Proyecto) {
         try {
             const sql = "select *from tareas where id_proyecto=? and id_usuario=?";
+           
             let result = await this.DB.Open(sql, [id_Proyecto,id_Usuario]);
     
             if (result && result.length > 0) {

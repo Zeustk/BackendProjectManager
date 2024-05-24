@@ -1,8 +1,6 @@
 const express = require("express");
 const path = require('path');
 const fs = require('fs');
-const upload = require('../app.js'); // Importar multer desde app.js
-const { url } = require("inspector");
 
 const router = express.Router();
 
@@ -11,32 +9,31 @@ const router = express.Router();
 module.exports = function (servicio) {
 
 
-   router.post('/api/addTarea', upload.single('pdf'), async (req, res) => {
+   router.post('/api/addTarea', async (req, res) => {
 
       try {
          const { Nombre, Fecha_Inicio, Fecha_Finalizacion, Descripcion, PorcentajeTarea, Id_Proyecto, Id_Usuario, urlPdf } = req.body;
 
-         console.log(urlPdf);
-         // Verificar si se ha enviado un archivo
-         if (!req.body.pdf) {
-           return res.status(400).json({ error: 'No se ha enviado ningún archivo PDF' });
-         }
-     
-         // Obtener el archivo desde el cuerpo de la solicitud
-         const pdfData = req.body.pdf;
-         const pdfBuffer = Buffer.from(pdfData, 'base64');
-     
-         // Crear un nombre de archivo único
-         const filename = Date.now() + '.pdf';
-         const filePath = path.join(__dirname, 'pdfTareas', filename);
-     
-         // Guardar el archivo en disco
-         fs.writeFileSync(filePath, pdfBuffer);
-     
-         // Ruta relativa del archivo en la carpeta pdfTareas
-         const pdfRelativePath = path.join('pdfTareas', filename);
+         const pdfBase64Content = req.body.urlPdf; // Aquí asumo que el contenido base64 se encuentra en req.body.urlPdf
 
-         const Tareas = await servicio.addTarea(Nombre, Fecha_Inicio, Fecha_Finalizacion, Descripcion, PorcentajeTarea, Id_Proyecto, Id_Usuario, urlPdf);
+         
+         // Decodificar el contenido base64 para obtener los bytes del archivo original
+         const pdfBuffer = Buffer.from(pdfBase64Content, 'base64');
+
+         const uniqueFilename = Date.now() + '_' + Math.random().toString(36).substring(7) + '.pdf';
+         
+      
+
+         // Especificar la ruta donde deseas guardar el archivo
+         const filePath = path.join('uploads/pdfTareas', uniqueFilename); // Cambia esto según la ruta y el nombre de archivo que desees
+
+         console.log(filePath);
+         // Escribir los bytes del archivo en el archivo en el sistema de archivos del servidor
+         fs.writeFileSync(filePath, pdfBuffer);
+
+       
+
+         const Tareas = await servicio.addTarea(Nombre, Fecha_Inicio, Fecha_Finalizacion, Descripcion, PorcentajeTarea, Id_Proyecto, Id_Usuario, filePath);
 
          res.status(200).json(Tareas);
       } catch (error) {
