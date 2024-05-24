@@ -4,6 +4,8 @@ class ServicioTareas {
         this.DB = DB;
     }
 
+    
+
 
     async addTarea(Nombre,Fecha_Inicio,Fecha_Finalizacion,Descripcion,Porcentajetarea,Id_Proyecto,Id_usuario,urlPdf) {
         try {
