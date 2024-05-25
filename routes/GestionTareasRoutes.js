@@ -14,6 +14,10 @@ module.exports = function (servicio) {
       try {
          const { Nombre, Fecha_Inicio, Fecha_Finalizacion, Descripcion, PorcentajeTarea, Id_Proyecto, Id_Usuario, urlPdf } = req.body;
 
+         if (!urlPdf) {
+            return res.status(400).json({ error: 'No se ha enviado ningún archivo PDF' });
+         }
+         
          const pdfBase64Content = req.body.urlPdf; // Aquí asumo que el contenido base64 se encuentra en req.body.urlPdf
 
          
