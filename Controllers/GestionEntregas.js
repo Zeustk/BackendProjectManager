@@ -17,10 +17,10 @@ class ServicioEntregas {
 
             const sql = "INSERT INTO TAREAS(Id_Tarea, Nombre, Fecha_Inicio, Fecha_Finalizacion,Descripcion,PorcentajeTarea,Id_Proyecto,Id_Usuario,Disponible,urlPdf) VALUES (NEXTVAL('secuenciatareas'), ?,?, ?, ?, ?,?,?,?,?)";
 
-            console.log('hola');
+           
 
 
-            await this.DB.Open(sql, [Nombre, Fecha_Inicio, Fecha_Finalizacion, Descripcion, Porcentajetarea, Id_Proyecto, Id_usuario, Disponible, urlPdf]);
+            await this.DB.Open(sql, [Informe, filePath, Id_Tarea,Disponible]);
 
             return 'Guardado Exitosamente';
         } catch (err) {
@@ -115,4 +115,4 @@ class ServicioEntregas {
 
 }
 
-module.exports = ServicioTareas;
+module.exports = ServicioEntregas;
