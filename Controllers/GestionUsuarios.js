@@ -128,6 +128,32 @@ class ServiciosUsuarios {
             return 'Error de consulta';
         }
     }
+
+    
+    async getUsuariosPorProyectos(Id_Proyecto) {
+        try {
+            const sql = "SELECT DISTINCT u.* FROM usuarios u LEFT JOIN detalleproyectousuarios t ON u.id_usuario = t.id_usuario where t.id_proyecto = ? AND Disponible= 'SI'";
+            let result = await this.DB.Open(sql, [Id_Proyecto]);
+    
+            if (result && result.length > 0) {
+                
+                return result.map(propiedad => ({
+                    "Id_Usuario": propiedad.id_usuario,
+                    "Email": propiedad.email,
+                    "Clave": propiedad.clave,
+                    "Id_rol": propiedad.id_rol
+                
+                }));
+            } else {
+                
+                return [];
+            }
+        } catch (err) {
+            
+            console.error(err);
+            return 'Error de consulta';
+        }
+    }
     
     
 

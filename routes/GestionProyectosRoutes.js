@@ -19,7 +19,9 @@ module.exports = function (servicio) {
 
          const Answer = await servicio.addProyecto(Lider_Proyecto, Nombre,Fecha_Inicio,Fecha_Finalizacion,Descripcion)
 
-         console.log(Answer);
+        
+
+         print(Answer);
 
          res.status(200).json(Answer)
 
@@ -38,6 +40,8 @@ module.exports = function (servicio) {
      console.log(id_Usuario);
 
       const Proyectos = await servicio.getProyecto(id_Usuario);
+
+      console.log(Proyectos);
 
       res.json(Proyectos);
    })
