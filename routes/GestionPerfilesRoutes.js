@@ -10,13 +10,13 @@ module.exports = function (servicio) {
 
       try {
 
-         const { Id_Perfil,Nombre_Completo,Email,Numero_De_Proyecto,Estado,Id_Usuario} = req.body;
+         const { Nombre_Completo,Numero_De_Proyecto,Estado,Id_Usuario} = req.body;
 
          
 
         
 
-         const Perfiles = await servicio.addPerfiles(Id_Perfil,Nombre_Completo,Email,Numero_De_Proyecto,Estado,Id_Usuario);
+         const Perfiles = await servicio.addPerfiles(Nombre_Completo,Numero_De_Proyecto,Estado,Id_Usuario);
 
          
 
@@ -57,6 +57,28 @@ module.exports = function (servicio) {
 
       res.json(DelPerfil);
    })
+
+
+   router.post('/api/getPerfilPorIdUsuario/:Id_Usuario',async(req,res)=>{
+       
+      
+      try {
+           
+        const {Id_Usuario}=req.params;
+        
+        console.log('hola');
+        console.log(Id_Usuario);
+        const perfil=await servicio.getPerfilConUsuarioId(Id_Usuario);
+        
+        res.status(200).json(perfil);
+        
+      } catch (error) {
+        res.status(404).json(error);
+      }
+  });
+
+
+
 
    return router;
 }

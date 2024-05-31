@@ -57,6 +57,7 @@ module.exports = function (servicio) {
    router.delete('/api/DeleteProyecto/:Id_Proyecto', async (req, res) => {
 
       const { Id_Proyecto} = req.params
+     
 
       const Answer = await servicio.DeleteProyecto(Id_Proyecto);
 

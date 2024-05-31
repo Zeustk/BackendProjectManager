@@ -8,19 +8,18 @@ class ServicioEntregas {
 
 
 
-    async addEntrega(Informe, filePath, Id_Tarea) {
+    async addEntrega(Informe, UrlPdfEntrega, Id_Tarea) {
         try {
 
             const Disponible = "SI";
 
 
 
-            const sql = "INSERT INTO TAREAS(Id_Tarea, Nombre, Fecha_Inicio, Fecha_Finalizacion,Descripcion,PorcentajeTarea,Id_Proyecto,Id_Usuario,Disponible,urlPdf) VALUES (NEXTVAL('secuenciatareas'), ?,?, ?, ?, ?,?,?,?,?)";
+            const sql = "INSERT INTO Entregas(Id_Entrega, Informe, UrlPdfEntrega, Id_Tarea,Disponible) VALUES (NEXTVAL('secuenciaentregas'), ?,?, ?, ?)";
 
            
 
-
-            await this.DB.Open(sql, [Informe, filePath, Id_Tarea,Disponible]);
+            await this.DB.Open(sql, [Informe, UrlPdfEntrega, Id_Tarea,Disponible]);
 
             return 'Guardado Exitosamente';
         } catch (err) {

@@ -5,15 +5,15 @@ class ServicioPerfiles {
     }
 
 
-    async addPerfiles(Id_Perfil,Nombre_Completo,Email,Numero_De_Proyecto,Estado,Id_Usuario) {
+    async addPerfiles(Nombre_Completo,Numero_De_Proyecto,Estado,Id_Usuario) {
         try {
 
            
-            Disponible="Si";
+           const Disponible="SI";
 
-            const sql = "INSERT INTO Perfiles(Id_Rol,Nombre,Prioridad) VALUES (NEXTVAL('secuenciaproyectos'), ?,?, ?, ?, ?,?)";
+            const sql = "INSERT INTO Perfiles(Id_Perfil,Nombre_Completo,Numero_Proyectos,Estado,Id_Usuario,Disponible) VALUES (NEXTVAL('secuenciaperfiles'),?, ?, ?, ?,?)";
     
-            await this.DB.Open(sql, [Id_Perfil,Nombre_Completo,Email,Numero_De_Proyecto,Estado,Id_Usuario,Disponible]);
+            await this.DB.Open(sql, [Nombre_Completo,Numero_De_Proyecto,Estado,Id_Usuario,Disponible]);
     
             return 'Guardado Exitosamente';
         } catch (err) {
@@ -90,6 +90,32 @@ class ServicioPerfiles {
 
     }
 
+    async getPerfilConUsuarioId(Id_Usuario) {
+        try {
+            console.log(Id_Usuario);
+            const sql = "SELECT *FROM perfiles WHERE Id_Usuario = ?";
+            let perfil = await this.DB.Open(sql, [Id_Usuario]);
+    
+            if (perfil && perfil.length > 0) {
+                return {
+                    "Id_Perfil": perfil[0].id_perfil,
+                    "Nombre_Completo": perfil[0].nombre_completo,
+                    "Numero_De_Proyecto": perfil[0].numero_proyectos,
+                    "Estado": perfil[0].estado,
+                    "Id_Usuario":perfil[0].id_usuario,
+                    "Disponible":perfil[0].disponible,
+
+        
+                };
+            } else {
+                return null; // No se encontraron registros
+            }
+        } catch (err) {
+            console.log(err);
+            return 'Error de consulta';
+        }
+    }
+    
 
 }
 

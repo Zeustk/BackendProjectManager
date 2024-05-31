@@ -21,23 +21,27 @@ const ControllerRol = require('./Controllers/GestionRol');
 const ControllerProyecto = require('./Controllers/GestionProyecto');
 const ControllerTareas = require('./Controllers/GestionTareas');
 const ControllerUsuarios = require('./Controllers/GestionUsuarios');
+const ControllerEntregas = require('./Controllers/GestionEntregas');
 
 // Instancias de los modulos
-const serviciomPerfilesI = new ControllerPerfiles(DB);
+const servicioPerfilesI = new ControllerPerfiles(DB);
 const ServicioDetalleProyectoI = new ControllerDetalleProyecto(DB);
 const servicioRolI = new ControllerRol(DB);
 const servicioProyectoI = new ControllerProyecto(DB);
 const servicioTareasI = new ControllerTareas(DB);
 const servicioUsuariosI = new ControllerUsuarios(DB);
+const servicioEntregasI = new ControllerEntregas(DB);
+
 
 
 // Routes (API)
-const PerfilesRoutes = require('./routes/GestionPerfilesRoutes')(serviciomPerfilesI); // Se le pasa el servicio con su base
+const PerfilesRoutes = require('./routes/GestionPerfilesRoutes')(servicioPerfilesI); // Se le pasa el servicio con su base
 const DetalleProyectoRoutes = require('./routes/GestionDetalleProyectoRoutes')(ServicioDetalleProyectoI);
 const RolRoutes = require('./routes/GestionRolesRoutes')(servicioRolI);
 const ProyectoRoutes = require('./routes/GestionProyectosRoutes')(servicioProyectoI);
 const TareasRoutes = require('./routes/GestionTareasRoutes')(servicioTareasI);
 const UsuariosRoutes = require('./routes/GestionUsuariosRoutes')(servicioUsuariosI);
+const EntregasRoutes = require('./routes/GestionEntregasRoutes')(servicioEntregasI);
 
 // SETS
 
@@ -58,6 +62,7 @@ app.use(RolRoutes);
 app.use(ProyectoRoutes);
 app.use(TareasRoutes);
 app.use(UsuariosRoutes);
+app.use(EntregasRoutes);
 
 
 

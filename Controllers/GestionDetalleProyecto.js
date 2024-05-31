@@ -5,7 +5,7 @@ class ServicioDetallesProyecto {
     }
 
 
-    async addDetalleproyecto(Id_Usuario, PorcentajeProyecto) {
+    async addDetalleproyecto(Id_Usuario, PorcentajeProyecto,Id_LiderProyecto) {
         try {
 
 
@@ -14,9 +14,9 @@ class ServicioDetallesProyecto {
 
 
 
-            const sql = "INSERT INTO detalleproyectousuarios(Id_Detalle,Id_Usuario,Id_Proyecto,PorcentajeProyecto) VALUES (NEXTVAL('secuenciadetalleproyectousuario'),?, ?,?)";
+            const sql = "INSERT INTO detalleproyectousuarios(Id_Detalle,Id_Usuario,Id_Proyecto,PorcentajeProyecto,Id_LiderProyecto) VALUES (NEXTVAL('secuenciadetalleproyectousuario'),?, ?,?,?)";
 
-            await this.DB.Open(sql, [Id_Usuario, Id_Proyecto, PorcentajeProyecto]);
+            await this.DB.Open(sql, [Id_Usuario, Id_Proyecto, PorcentajeProyecto,Id_LiderProyecto]);
 
             return 'Guardado Exitosamente';
         } catch (err) {
