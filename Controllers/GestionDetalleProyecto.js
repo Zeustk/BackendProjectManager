@@ -11,12 +11,14 @@ class ServicioDetallesProyecto {
 
           const Id_Proyecto=await this.getIdActualproyecto();
 
+          const Disponible="SI";
 
 
 
-            const sql = "INSERT INTO detalleproyectousuarios(Id_Detalle,Id_Usuario,Id_Proyecto,PorcentajeProyecto,Id_LiderProyecto) VALUES (NEXTVAL('secuenciadetalleproyectousuario'),?, ?,?,?)";
 
-            await this.DB.Open(sql, [Id_Usuario, Id_Proyecto, PorcentajeProyecto,Id_LiderProyecto]);
+            const sql = "INSERT INTO detalleproyectousuarios(Id_Detalle,Id_Usuario,Id_Proyecto,PorcentajeProyecto,Id_LiderProyecto,Disponible) VALUES (NEXTVAL('secuenciadetalleproyectousuario'),?, ?,?,?,?)";
+
+            await this.DB.Open(sql, [Id_Usuario, Id_Proyecto, PorcentajeProyecto,Id_LiderProyecto,Disponible]);
 
             return 'Guardado Exitosamente';
         } catch (err) {
@@ -73,14 +75,14 @@ class ServicioDetallesProyecto {
     }
 
 
-    async DeleteDetalleproyecto(Id_Detalle) {
+    async DeleteUsuarioproyecto(Id_Usuario) {
 
         try {
 
             //TU MIRAS AVER QUE ACTUALIZAS AQUI //POR QUE DISPONOBLE NO ESTA 
-            const sql = "update detalleproyectousuarios set Disponible='NO' where Id_Detalle=?";
+            const sql = "update detalleproyectousuarios set Disponible='NO' where Id_Usuario=?";
 
-            await this.DB.Open(sql, [Id_Detalle], true);
+            await this.DB.Open(sql, [Id_Usuario], true);
 
             return ('Eliminado Correctamente')
         }

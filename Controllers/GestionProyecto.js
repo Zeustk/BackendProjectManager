@@ -27,7 +27,7 @@ class ServicioProyectos {
         
         try {
          
-            const sql = "SELECT DISTINCT p.* FROM proyectos p LEFT JOIN detalleproyectousuarios t ON p.id_proyecto = t.id_proyecto where t.id_usuario = ? AND Disponible= 'SI' ";
+            const sql = "SELECT DISTINCT p.* FROM proyectos p LEFT JOIN detalleproyectousuarios t ON p.id_proyecto = t.id_proyecto where t.id_usuario = ? AND p.Disponible= 'SI' ";
 
             let result = await this.DB.Open(sql, [id_usuario]);
     

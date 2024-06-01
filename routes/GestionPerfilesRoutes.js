@@ -66,8 +66,7 @@ module.exports = function (servicio) {
            
         const {Id_Usuario}=req.params;
         
-        console.log('hola');
-        console.log(Id_Usuario);
+
         const perfil=await servicio.getPerfilConUsuarioId(Id_Usuario);
         
         res.status(200).json(perfil);

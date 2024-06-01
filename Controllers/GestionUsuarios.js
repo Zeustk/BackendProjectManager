@@ -25,7 +25,7 @@ class ServiciosUsuarios {
 
     async getUsuarios() {
         try {
-            const sql = "select * from Usuarios";
+            const sql = "select * from Usuarios where Disponible = 'SI'";
             let result = await this.DB.Open(sql, []);
     
             if (result && result.length > 0) {
@@ -132,7 +132,7 @@ class ServiciosUsuarios {
     
     async getUsuariosPorProyectos(Id_Proyecto) {
         try {
-            const sql = "SELECT DISTINCT u.* FROM usuarios u LEFT JOIN detalleproyectousuarios t ON u.id_usuario = t.id_usuario where t.id_proyecto = ? AND Disponible= 'SI'";
+            const sql = "SELECT DISTINCT u.* FROM usuarios u LEFT JOIN detalleproyectousuarios t ON u.id_usuario = t.id_usuario where t.id_proyecto = ? AND u.Disponible= 'SI' AND t.Disponible= 'SI'";
             let result = await this.DB.Open(sql, [Id_Proyecto]);
     
             if (result && result.length > 0) {

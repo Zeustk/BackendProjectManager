@@ -37,11 +37,8 @@ module.exports = function (servicio) {
 
      const id_Usuario = req.params.id_Usuario;
 
-     console.log(id_Usuario);
-
       const Proyectos = await servicio.getProyecto(id_Usuario);
 
-      console.log(Proyectos);
 
       res.json(Proyectos);
    })
