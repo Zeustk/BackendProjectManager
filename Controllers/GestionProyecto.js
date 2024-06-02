@@ -5,15 +5,15 @@ class ServicioProyectos {
     }
 
 
-    async addProyecto(Lider_Proyecto, Nombre, Fecha_Inicio, Fecha_Finalizacion,Descripcion) {
+    async addProyecto(Lider_Proyecto, Nombre, Fecha_Inicio, Fecha_Finalizacion,Descripcion,Id_Estado) {
         try {
 
             const Disponible="SI";
 
 
-            const sql = "INSERT INTO Proyectos(Id_Proyecto, Lider_Proyecto, Nombre, Fecha_Inicio, Fecha_Finalizacion,Descripcion,Disponible) VALUES (NEXTVAL('secuenciaproyectos'), ?,?, ?, ?, ?,?)";
+            const sql = "INSERT INTO Proyectos(Id_Proyecto, Lider_Proyecto, Nombre, Fecha_Inicio, Fecha_Finalizacion,Descripcion,Disponible,Id_Estado) VALUES (NEXTVAL('secuenciaproyectos'), ?,?, ?, ?, ?,?,?)";
     
-            await this.DB.Open(sql, [Lider_Proyecto, Nombre, Fecha_Inicio, Fecha_Finalizacion,Descripcion,Disponible]);
+            await this.DB.Open(sql, [Lider_Proyecto, Nombre, Fecha_Inicio, Fecha_Finalizacion,Descripcion,Disponible,Id_Estado]);
     
             return 'Guardado Exitosamente';
         } catch (err) {
@@ -40,6 +40,7 @@ class ServicioProyectos {
                     "Fecha_Inicio": propiedad.fecha_inicio,
                     "Fecha_Finalizacion": propiedad.fecha_finalizacion,
                     "Descripcion":propiedad.descripcion,
+                    "Id_Estado":propiedad.id_estado,
                 }));
             } else {
                 // No se encontraron proyectos
@@ -58,10 +59,7 @@ class ServicioProyectos {
 
         try { 
             
-            /* console.log(Id);
-            console.log(Nombre);
-            console.log(Precio);
-            console.log(ValorDia); */
+        
             
             const sql = "update Proyectos set Lider_Proyecto=?,Nombre=?,Fecha_Inicio=?,Fecha_Finalizacion=?,Descripcion=? where Id_Proyecto=?";
 

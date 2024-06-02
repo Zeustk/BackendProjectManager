@@ -5,20 +5,29 @@ class ServicioDetallesProyecto {
     }
 
 
-    async addDetalleproyecto(Id_Usuario, PorcentajeProyecto,Id_LiderProyecto) {
+    async addDetalleproyecto(Id_Usuario, PorcentajeProyecto,Id_Proyecto,Id_LiderProyecto) {
         try {
 
 
-          const Id_Proyecto=await this.getIdActualproyecto();
+            const Disponible="SI";
+            let Id_ProyectoReal=-1;
 
-          const Disponible="SI";
+            if (Id_Proyecto==-1){
 
+                Id_ProyectoReal=await this.getIdActualproyecto();
 
-
+            }
+            else{
+                Id_ProyectoReal=Id_Proyecto;
+            }
+         
 
             const sql = "INSERT INTO detalleproyectousuarios(Id_Detalle,Id_Usuario,Id_Proyecto,PorcentajeProyecto,Id_LiderProyecto,Disponible) VALUES (NEXTVAL('secuenciadetalleproyectousuario'),?, ?,?,?,?)";
 
-            await this.DB.Open(sql, [Id_Usuario, Id_Proyecto, PorcentajeProyecto,Id_LiderProyecto,Disponible]);
+      
+          
+
+            await this.DB.Open(sql, [Id_Usuario, Id_ProyectoReal, PorcentajeProyecto,Id_LiderProyecto,Disponible]);
 
             return 'Guardado Exitosamente';
         } catch (err) {

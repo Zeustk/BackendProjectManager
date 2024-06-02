@@ -8,19 +8,19 @@ class ServicioTareas {
 
 
 
-    async addTarea(Nombre, Fecha_Inicio, Fecha_Finalizacion, Descripcion, Porcentajetarea, Id_Proyecto, Id_usuario, urlPdf) {
+    async addTarea(Nombre, Fecha_Inicio, Fecha_Finalizacion, Descripcion, Porcentajetarea, Id_Proyecto, Id_usuario, urlPdf,Id_Estado) {
         try {
 
             const Disponible = "SI";
 
 
 
-            const sql = "INSERT INTO TAREAS(Id_Tarea, Nombre, Fecha_Inicio, Fecha_Finalizacion,Descripcion,PorcentajeTarea,Id_Proyecto,Id_Usuario,Disponible,urlPdf) VALUES (NEXTVAL('secuenciatareas'), ?,?, ?, ?, ?,?,?,?,?)";
+            const sql = "INSERT INTO TAREAS(Id_Tarea, Nombre, Fecha_Inicio, Fecha_Finalizacion,Descripcion,PorcentajeTarea,Id_Proyecto,Id_Usuario,Disponible,urlPdf,Id_Estado) VALUES (NEXTVAL('secuenciatareas'), ?,?, ?, ?, ?,?,?,?,?,?)";
 
             console.log('hola');
 
 
-            await this.DB.Open(sql, [Nombre, Fecha_Inicio, Fecha_Finalizacion, Descripcion, Porcentajetarea, Id_Proyecto, Id_usuario, Disponible, urlPdf]);
+            await this.DB.Open(sql, [Nombre, Fecha_Inicio, Fecha_Finalizacion, Descripcion, Porcentajetarea, Id_Proyecto, Id_usuario, Disponible, urlPdf,Id_Estado]);
 
             return 'Guardado Exitosamente';
         } catch (err) {
@@ -58,7 +58,8 @@ class ServicioTareas {
                         "Id_Proyecto": propiedad.id_proyecto,
                         "Id_usuario": propiedad.id_usuario,
                         "Disponible": propiedad.disponible,
-                        "urlPdf": pdfBase64 // Enviar el PDF en formato base64
+                        "urlPdf": pdfBase64, // Enviar el PDF en formato base64
+                        "Id_Estado":propiedad.id_estado,
                     };
                 }));
             } else {

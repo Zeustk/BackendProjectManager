@@ -12,7 +12,7 @@ module.exports = function (servicio) {
    router.post('/api/addTarea', async (req, res) => {
 
       try {
-         const { Nombre, Fecha_Inicio, Fecha_Finalizacion, Descripcion, PorcentajeTarea, Id_Proyecto, Id_Usuario, urlPdf } = req.body;
+         const { Nombre, Fecha_Inicio, Fecha_Finalizacion, Descripcion, PorcentajeTarea, Id_Proyecto, Id_Usuario, urlPdf,Id_Estado } = req.body;
 
          if (!urlPdf) {
             return res.status(400).json({ error: 'No se ha enviado ningún archivo PDF' });
@@ -37,7 +37,7 @@ module.exports = function (servicio) {
 
        
 
-         const Tareas = await servicio.addTarea(Nombre, Fecha_Inicio, Fecha_Finalizacion, Descripcion, PorcentajeTarea, Id_Proyecto, Id_Usuario, filePath);
+         const Tareas = await servicio.addTarea(Nombre, Fecha_Inicio, Fecha_Finalizacion, Descripcion, PorcentajeTarea, Id_Proyecto, Id_Usuario, filePath,Id_Estado);
 
          res.status(200).json(Tareas);
       } catch (error) {
