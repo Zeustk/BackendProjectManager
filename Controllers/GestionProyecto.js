@@ -45,11 +45,13 @@ class ServicioProyectos {
                 }));
             } else {
                 // No se encontraron proyectos
+                
     
                 return [];
             }
         } catch (err) {
             // Manejar errores
+            console.log('error en proyecto get');
             console.error(err);
             return 'Error de consulta';
         }
