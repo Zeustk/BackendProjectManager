@@ -113,6 +113,25 @@ class ServicioTareas {
 
     }
 
+    async UpdateEstadoTareas(Id_Tarea, Id_Estado) {
+
+        try {
+
+
+            const sql = "update Tareas set Id_Estado=? where Id_Tarea=?";
+
+            await this.DB.Open(sql, [Id_Estado,Id_Tarea]);
+
+            return ('Actualizado Correctamente')
+        }
+
+        catch (err) {
+            console.error(err);
+            return ('Error al actualizar');
+        }
+
+    }
+
 
 }
 

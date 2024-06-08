@@ -78,5 +78,16 @@ module.exports = function (servicio) {
       res.json(Deltarea);
    })
 
+   router.put('/api/UpdateEstadoTarea', async (req, res) => {
+
+      const { Id_Tarea, Id_Estado } = req.body
+
+
+      const updateTarea = await servicio.UpdateEstadoTareas(Id_Tarea, Id_Estado);
+
+
+      res.status(200).json(updateTarea);
+   })
+
    return router;
 }

@@ -5,15 +5,15 @@ class ServicioProyectos {
     }
 
 
-    async addProyecto(Lider_Proyecto, Nombre, Fecha_Inicio, Fecha_Finalizacion,Descripcion,Id_Estado) {
+    async addProyecto(Lider_Proyecto, Nombre, Fecha_Inicio, Fecha_Finalizacion,Descripcion,Id_Estado,PorcentajeProyecto) {
         try {
 
             const Disponible="SI";
 
 
-            const sql = "INSERT INTO Proyectos(Id_Proyecto, Lider_Proyecto, Nombre, Fecha_Inicio, Fecha_Finalizacion,Descripcion,Disponible,Id_Estado) VALUES (NEXTVAL('secuenciaproyectos'), ?,?, ?, ?, ?,?,?)";
+            const sql = "INSERT INTO Proyectos(Id_Proyecto, Lider_Proyecto, Nombre, Fecha_Inicio, Fecha_Finalizacion,Descripcion,Disponible,Id_Estado,PorcentajeProyecto) VALUES (NEXTVAL('secuenciaproyectos'), ?,?, ?, ?, ?,?,?,?)";
     
-            await this.DB.Open(sql, [Lider_Proyecto, Nombre, Fecha_Inicio, Fecha_Finalizacion,Descripcion,Disponible,Id_Estado]);
+            await this.DB.Open(sql, [Lider_Proyecto, Nombre, Fecha_Inicio, Fecha_Finalizacion,Descripcion,Disponible,Id_Estado,PorcentajeProyecto]);
     
             return 'Guardado Exitosamente';
         } catch (err) {
@@ -41,9 +41,11 @@ class ServicioProyectos {
                     "Fecha_Finalizacion": propiedad.fecha_finalizacion,
                     "Descripcion":propiedad.descripcion,
                     "Id_Estado":propiedad.id_estado,
+                    "PorcentajeProyecto":propiedad.porcentajeproyecto,
                 }));
             } else {
                 // No se encontraron proyectos
+    
                 return [];
             }
         } catch (err) {

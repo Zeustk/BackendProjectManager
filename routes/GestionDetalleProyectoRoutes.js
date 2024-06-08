@@ -10,13 +10,13 @@ module.exports = function (servicio) {
 
       try {
 
-         const {Id_Usuario,PorcentajeProyecto,Id_Proyecto,Id_LiderProyecto} = req.body;
+         const {Id_Usuario,Id_Proyecto,Id_LiderProyecto} = req.body;
 
          
 
         
 
-         const Detalles = await servicio.addDetalleproyecto(Id_Usuario,PorcentajeProyecto,Id_Proyecto,Id_LiderProyecto);
+         const Detalles = await servicio.addDetalleproyecto(Id_Usuario,Id_Proyecto,Id_LiderProyecto);
 
          
 
@@ -40,9 +40,9 @@ module.exports = function (servicio) {
 
    router.put('/api/UpdateDetalleproyecto', async (req, res) => {
 
-      const { Id_Detalle,Id_Usuario,Id_Proyecto,PorcentajeProyecto} = req.body
+      const { Id_Detalle,Id_Usuario,Id_Proyecto} = req.body
 
-      const updateRDetalles = await servicio.UpdateDetalleproyecto(Id_Detalle,Id_Usuario,Id_Proyecto,PorcentajeProyecto);
+      const updateRDetalles = await servicio.UpdateDetalleproyecto(Id_Detalle,Id_Usuario,Id_Proyecto);
 
 
       res.json(updateRDetalles);

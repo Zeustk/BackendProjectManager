@@ -10,11 +10,11 @@ module.exports = function (servicio) {
 
       try {
 
-         const { Lider_Proyecto, Nombre,Fecha_Inicio,Fecha_Finalizacion,Descripcion,Id_Estado } = req.body;
+         const { Lider_Proyecto, Nombre,Fecha_Inicio,Fecha_Finalizacion,Descripcion,Id_Estado,PorcentajeProyecto } = req.body;
 
    
 
-         const Answer = await servicio.addProyecto(Lider_Proyecto, Nombre,Fecha_Inicio,Fecha_Finalizacion,Descripcion,Id_Estado);
+         const Answer = await servicio.addProyecto(Lider_Proyecto, Nombre,Fecha_Inicio,Fecha_Finalizacion,Descripcion,Id_Estado,PorcentajeProyecto);
 
      
 

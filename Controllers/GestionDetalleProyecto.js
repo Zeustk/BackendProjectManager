@@ -5,7 +5,7 @@ class ServicioDetallesProyecto {
     }
 
 
-    async addDetalleproyecto(Id_Usuario, PorcentajeProyecto,Id_Proyecto,Id_LiderProyecto) {
+    async addDetalleproyecto(Id_Usuario,Id_Proyecto,Id_LiderProyecto) {
         try {
 
 
@@ -22,12 +22,12 @@ class ServicioDetallesProyecto {
             }
          
 
-            const sql = "INSERT INTO detalleproyectousuarios(Id_Detalle,Id_Usuario,Id_Proyecto,PorcentajeProyecto,Id_LiderProyecto,Disponible) VALUES (NEXTVAL('secuenciadetalleproyectousuario'),?, ?,?,?,?)";
+            const sql = "INSERT INTO detalleproyectousuarios(Id_Detalle,Id_Usuario,Id_Proyecto,Id_LiderProyecto,Disponible) VALUES (NEXTVAL('secuenciadetalleproyectousuario'),?,?,?,?)";
 
       
           
 
-            await this.DB.Open(sql, [Id_Usuario, Id_ProyectoReal, PorcentajeProyecto,Id_LiderProyecto,Disponible]);
+            await this.DB.Open(sql, [Id_Usuario, Id_ProyectoReal, Id_LiderProyecto,Disponible]);
 
             return 'Guardado Exitosamente';
         } catch (err) {
@@ -48,7 +48,6 @@ class ServicioDetallesProyecto {
                     "Id_Detalle": propiedad.Id_Detalle,
                     "Id_Usuario": propiedad.Id_Usuario,
                     "Id_Proyecto": propiedad.Id_Proyecto,
-                    "PorcentajeProyecto": propiedad.PorcentajeProyecto
                 }));
             } else {
 
@@ -63,15 +62,15 @@ class ServicioDetallesProyecto {
 
 
 
-    async UpdateDetalleproyecto(Id_Detalle, Id_Usuario, Id_Proyecto, PorcentajeProyecto) {
+    async UpdateDetalleproyecto(Id_Detalle, Id_Usuario, Id_Proyecto) {
 
         try {
 
 
 
-            const sql = "update detalleproyectousuarios set PorcentajeProyecto=?, Id_Usuario=? ,Id_Proyecto=? where Id_Detalle=?";
+            const sql = "update detalleproyectousuarios set Id_Usuario=? ,Id_Proyecto=? where Id_Detalle=?";
 
-            await this.DB.Open(sql, [Id_Detalle, Id_Usuario, Id_Proyecto, PorcentajeProyecto]);
+            await this.DB.Open(sql, [Id_Detalle, Id_Usuario, Id_Proyecto]);
 
             return ('Actualizado Correctamente')
         }
