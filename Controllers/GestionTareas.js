@@ -32,7 +32,7 @@ class ServicioTareas {
 
     async getTareas(id_Usuario, id_Proyecto) {
         try {
-            const sql = "select * from tareas where id_proyecto=? and id_usuario=?";
+            const sql = "select * from tareas where id_proyecto=? and id_usuario=? AND Disponible = 'SI'";
 
             let result = await this.DB.Open(sql, [id_Proyecto, id_Usuario]);
 
