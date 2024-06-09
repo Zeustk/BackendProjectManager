@@ -60,5 +60,15 @@ module.exports = function (servicio) {
       res.json(Answer);
    })
 
+   router.get('/api/getProyectoByLiderProyecto/:id_LiderProyecto', async (req, res) => {
+
+      const id_LiderProyecto = req.params.id_LiderProyecto;
+ 
+       const Proyectos = await servicio.getProyectoPorLider(id_LiderProyecto);
+ 
+ 
+       res.json(Proyectos);
+    })
+
    return router;
 }
