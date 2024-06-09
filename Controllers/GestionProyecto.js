@@ -133,7 +133,7 @@ class ServicioProyectos {
 
     async getInformebyId(Id_Proyecto) {
         try {
-            
+
             const sql = `SELECT
                             COUNT(*) FILTER (WHERE T.Id_Estado = 3) AS Tareas_Completadas,
                             COUNT(*) FILTER (WHERE T.Id_Estado = 2) AS Tareas_En_Curso,
@@ -143,10 +143,10 @@ class ServicioProyectos {
                             Tareas T
                         WHERE
                             T.Id_Proyecto = ? AND DISPONIBLE = 'SI'`;
-    
+
             let result = await this.DB.Open(sql, [Id_Proyecto]);
-           
-    
+
+
             if (result && result.length > 0) {
                 // Aquí iteramos sobre el arreglo result directamente
                 return result.map(propiedad => ({
@@ -163,8 +163,49 @@ class ServicioProyectos {
             return 'Error de consulta';
         }
     }
-    
-    
+
+    async getInformeGeneralbyLider(id_LiderProyecto) {
+        try {
+
+            const sql = `SELECT
+                        P.nombre,
+                        COUNT(DISTINCT T.id_tarea) FILTER (WHERE T.Id_Estado = 3 AND T.Disponible = 'SI') AS Tareas_Completadas,
+                        COUNT(DISTINCT T.id_tarea) FILTER (WHERE T.Id_Estado = 2 AND T.Disponible = 'SI') AS Tareas_En_Curso,
+                        COUNT(DISTINCT T.id_tarea) FILTER (WHERE T.Id_Estado = 1 AND T.Disponible = 'SI') AS Tareas_Pendientes,
+                        COUNT(DISTINCT T.id_tarea) FILTER (WHERE T.Disponible = 'SI') AS Total_Tareas,
+                        P.porcentajeProyecto
+                    FROM
+                        Proyectos P
+                    LEFT JOIN detalleproyectousuarios DPU ON P.id_proyecto = DPU.id_proyecto
+                    LEFT JOIN Tareas T ON P.id_proyecto = T.id_proyecto
+                    WHERE
+                        DPU.id_liderproyecto = ? AND P.Disponible = 'SI'
+                    GROUP BY
+                        P.id_proyecto`;
+
+            let result = await this.DB.Open(sql, [id_LiderProyecto]);
+
+
+            if (result && result.length > 0) {
+                // Aquí iteramos sobre el arreglo result directamente
+                return result.map(propiedad => ({
+                    "Nombre_Proyecto":propiedad.nombre,
+                    "Tareas_Completadas": propiedad.tareas_completadas,
+                    "Tareas_En_Curso": propiedad.tareas_en_curso,
+                    "Tareas_Pendientes": propiedad.tareas_pendientes,
+                    "Total_Tareas": propiedad.total_tareas,
+                    "Porcentaje_Proyecto":propiedad.porcentajeproyecto,
+                }));
+            } else {
+                return {}; // No se encontraron registros
+            }
+        } catch (err) {
+            console.error(err);
+            return 'Error de consulta';
+        }
+    }
+
+
 
 
 
