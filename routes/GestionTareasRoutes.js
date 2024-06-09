@@ -69,11 +69,11 @@ module.exports = function (servicio) {
    })
 
 
-   router.delete('/api/DeleteTarea/:Id_Tarea', async (req, res) => {
+   router.delete('/api/DeleteTareas/:Id_Tarea', async (req, res) => {
 
       const { Id_Tarea } = req.params
 
-      const Deltarea = await servicio.DeleteTarea(Id_Tarea);
+      const Deltarea = await servicio.DeleteTareas(Id_Tarea);
 
       res.json(Deltarea);
    })

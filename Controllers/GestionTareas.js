@@ -96,9 +96,9 @@ class ServicioTareas {
 
 
     async DeleteTareas(Id_Tarea) {
-
+        console.log(Id_Tarea);
         try {
-
+            
             const sql = "update Tareas set Disponible='NO' where Id_Tarea=?";
 
             await this.DB.Open(sql, [Id_Tarea], true);
