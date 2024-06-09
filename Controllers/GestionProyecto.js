@@ -131,6 +131,41 @@ class ServicioProyectos {
         }
     }
 
+    async getInformebyId(Id_Proyecto) {
+        try {
+            
+            const sql = `SELECT
+                            COUNT(*) FILTER (WHERE T.Id_Estado = 3) AS Tareas_Completadas,
+                            COUNT(*) FILTER (WHERE T.Id_Estado = 2) AS Tareas_En_Curso,
+                            COUNT(*) FILTER (WHERE T.Id_Estado = 1) AS Tareas_Pendientes,
+                            COUNT(*) AS Total_Tareas
+                        FROM
+                            Tareas T
+                        WHERE
+                            T.Id_Proyecto = ? AND DISPONIBLE = 'SI'`;
+    
+            let result = await this.DB.Open(sql, [Id_Proyecto]);
+           
+    
+            if (result && result.length > 0) {
+                // Aquí iteramos sobre el arreglo result directamente
+                return result.map(propiedad => ({
+                    "Tareas_Completadas": propiedad.tareas_completadas,
+                    "Tareas_En_Curso": propiedad.tareas_en_curso,
+                    "Tareas_Pendientes": propiedad.tareas_pendientes,
+                    "Total_Tareas": propiedad.total_tareas,
+                }));
+            } else {
+                return {}; // No se encontraron registros
+            }
+        } catch (err) {
+            console.error(err);
+            return 'Error de consulta';
+        }
+    }
+    
+    
+
 
 
 }

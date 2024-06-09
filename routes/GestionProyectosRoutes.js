@@ -70,5 +70,17 @@ module.exports = function (servicio) {
        res.json(Proyectos);
     })
 
+    router.get('/api/getInformeProyectoById/:id_Proyecto', async (req, res) => {
+
+      const id_Proyecto = req.params.id_Proyecto;
+
+      console.log('hola');
+ 
+       const Proyectos = await servicio.getInformebyId(id_Proyecto);
+ 
+ 
+       res.json(Proyectos);
+    })
+
    return router;
 }
