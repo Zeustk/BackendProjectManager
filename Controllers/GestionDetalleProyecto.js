@@ -120,6 +120,33 @@ class ServicioDetallesProyecto {
         }
     }
 
+    async getproyectosLiderByUsuario(Id_Usuario) {
+        try {
+            const sql = "select DISTINCT(id_proyecto) from detalleproyectousuarios where id_liderproyecto=?";
+            let result = await this.DB.Open(sql, [Id_Usuario]);
+
+            
+
+            if (result && result.length > 0) {
+
+
+                return result.map(propiedad => ({
+                    "Id_Proyecto": propiedad.id_proyecto,
+                 
+                }));
+            } else {
+
+                
+
+                return [];
+            }
+        } catch (err) {
+
+            console.error(err);
+            return 'Error de consulta';
+        }
+    }
+
 
 
 
