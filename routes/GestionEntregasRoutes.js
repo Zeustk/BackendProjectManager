@@ -77,5 +77,18 @@ module.exports = function (servicio) {
       res.json(Deltarea);
    })
 
+   router.get('/api/getFueEntregada/:id_Tarea', async (req, res) => {
+
+      const id_Tarea = req.params.id_Tarea;
+
+
+      const fueEntregada = await servicio.tareaFueEntregada(id_Tarea);
+
+      res.json(fueEntregada);
+   })
+
+
+
+
    return router;
 }

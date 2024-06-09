@@ -110,6 +110,22 @@ class ServicioEntregas {
         }
 
     }
+    async tareaFueEntregada(Id_Tarea) {
+        try {
+   
+            const sql = "SELECT *FROM Entregas WHERE Id_Tarea = ?";
+            let perfil = await this.DB.Open(sql, [Id_Tarea]);
+    
+            if (perfil && perfil.length > 0) {
+               return true;
+            } else {
+                return false; // No se encontraron registros
+            }
+        } catch (err) {
+            console.log(err);
+            return 'Error de consulta';
+        }
+    }
 
 
 }
