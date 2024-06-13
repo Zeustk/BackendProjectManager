@@ -29,48 +29,6 @@ class ServicioEntregas {
     }
 
 
-    async getTareas(id_Usuario, id_Proyecto) {
-        try {
-            const sql = "select * from tareas where id_proyecto=? and id_usuario=?";
-
-            let result = await this.DB.Open(sql, [id_Proyecto, id_Usuario]);
-
-            if (result && result.length > 0) {
-                return await Promise.all(result.map(async (propiedad) => {
-                    let pdfBase64 = null;
-                    if (propiedad.urlpdf) {
-                        try {
-                            const pdfBuffer = fs.readFileSync(propiedad.urlpdf);
-                            pdfBase64 = pdfBuffer.toString('base64');
-                        } catch (err) {
-                            console.error(`Error al leer el archivo PDF en la ruta ${propiedad.urlpdf}: `, err);
-                        }
-                    }
-
-                    return {
-                        "Id_Tarea": propiedad.id_tarea,
-                        "Nombre": propiedad.nombre,
-                        "Fecha_Inicio": propiedad.fecha_inicio,
-                        "Fecha_Finalizacion": propiedad.fecha_finalizacion,
-                        "Descripcion": propiedad.descripcion,
-                        "PorcentajeTarea": propiedad.porcentajetarea,
-                        "Id_Proyecto": propiedad.id_proyecto,
-                        "Id_usuario": propiedad.id_usuario,
-                        "Disponible": propiedad.disponible,
-                        "urlPdf": pdfBase64 // Enviar el PDF en formato base64
-                    };
-                }));
-            } else {
-                return [];
-            }
-        } catch (err) {
-            console.error(err);
-            return 'Error de consulta ' + err;
-        }
-    }
-
-
-
 
     async UpdateTareas(Id_Tarea, Nombre, Fecha_Inicio, Fecha_Finalizacion, Descripcion, Porcentajetarea) {
 
@@ -110,16 +68,33 @@ class ServicioEntregas {
         }
 
     }
-    async tareaFueEntregada(Id_Tarea) {
+    async getEntrega(Id_Tarea) {
         try {
-   
-            const sql = "SELECT *FROM Entregas WHERE Id_Tarea = ?";
-            let perfil = await this.DB.Open(sql, [Id_Tarea]);
+            const sql = "SELECT * FROM Entregas WHERE Id_Tarea = ? AND Disponible='SI'";
+            let entrega = await this.DB.Open(sql, [Id_Tarea]);
     
-            if (perfil && perfil.length > 0) {
-               return true;
+            if (entrega && entrega.length > 0) {
+                return await Promise.all(entrega.map(async (propiedad) => {
+                    let pdfBase64 = null;
+                    if (propiedad.urlpdfentrega) {
+                        try {
+                            const pdfBuffer = fs.readFileSync(propiedad.urlpdfentrega);
+                            pdfBase64 = pdfBuffer.toString('base64');
+                        } catch (err) {
+                            console.error(`Error al leer el archivo PDF en la ruta ${propiedad.urlpdfentrega}: `, err);
+                        }
+                    }
+    
+                    return {
+                        "Id_Entrega": propiedad.id_entrega,
+                        "Informe": propiedad.informe,
+                        "UrlPdfEntrega": pdfBase64, // Suponiendo que necesita el contenido base64 aquí
+                        "Id_Tarea": propiedad.id_tarea,
+                        "Disponible": propiedad.disponible,
+                    };
+                }));
             } else {
-                return false; // No se encontraron registros
+                return [];
             }
         } catch (err) {
             console.log(err);

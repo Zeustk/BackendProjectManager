@@ -56,7 +56,7 @@ class ServicioTareas {
                         "Descripcion": propiedad.descripcion,
                         "PorcentajeTarea": propiedad.porcentajetarea,
                         "Id_Proyecto": propiedad.id_proyecto,
-                        "Id_usuario": propiedad.id_usuario,
+                        "Id_Usuario": propiedad.id_usuario,
                         "Disponible": propiedad.disponible,
                         "urlPdf": pdfBase64, // Enviar el PDF en formato base64
                         "Id_Estado":propiedad.id_estado,

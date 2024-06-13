@@ -45,17 +45,6 @@ module.exports = function (servicio) {
       }
    });
 
-   router.get('/api/getTarea/:id_Proyecto/:id_Usuario', async (req, res) => {
-
-      const id_Usuario = req.params.id_Usuario;
-
-      const id_Proyecto = req.params.id_Proyecto;
-
-      const Tareas = await servicio.getTareas(id_Usuario, id_Proyecto);
-
-      res.json(Tareas);
-   })
-
 
    router.put('/api/UpdateTarea', async (req, res) => {
 
@@ -77,14 +66,14 @@ module.exports = function (servicio) {
       res.json(Deltarea);
    })
 
-   router.get('/api/getFueEntregada/:id_Tarea', async (req, res) => {
+   router.get('/api/getEntrega/:id_Tarea', async (req, res) => {
 
       const id_Tarea = req.params.id_Tarea;
 
 
-      const fueEntregada = await servicio.tareaFueEntregada(id_Tarea);
+      const entrega = await servicio.getEntrega(id_Tarea);
 
-      res.json(fueEntregada);
+      res.json(entrega);
    })
 
 
