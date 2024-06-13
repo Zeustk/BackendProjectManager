@@ -58,9 +58,9 @@ module.exports = function (servicio) {
 
    router.put('/api/UpdateUsuarios', async (req, res) => {
 
-      const { Id_Usuario, Email, Clave, Id_rol } = req.body
+      const { Id_Usuario, Email, Clave} = req.body
 
-      const updateUsuarios = await servicio.UpdateUsuarios(Id_Usuario, Email, Clave, Id_rol);
+      const updateUsuarios = await servicio.UpdateUsuarios(Id_Usuario, Email, Clave);
 
 
       res.json(updateUsuarios);

@@ -50,15 +50,15 @@ class ServiciosUsuarios {
     
 
 
-    async UpdateUsuarios(Id_Usuario,Email,Clave,Id_rol) {
+    async UpdateUsuarios(Id_Usuario,Email,Clave) {
 
         try { 
             
             
             
-            const sql = "update Usuarios set Email=?,Clave=?,Id_rol=? where Id_Usuario=?";
+            const sql = "update Usuarios set Email=?,Clave=? where Id_Usuario=?";
 
-            await this.DB.Open(sql, [Id_Usuario,Email,Clave,Id_rol]);
+            await this.DB.Open(sql, [Email,Clave,Id_Usuario]);
 
             return ('Actualizado Correctamente')
         }

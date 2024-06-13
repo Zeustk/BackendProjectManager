@@ -51,15 +51,15 @@ class ServicioPerfiles {
     
 
 
-    async UpdatePerfiles(Id_Perfil,Nombre_Completo,Email,Numero_De_Proyecto,Estado,Id_Usuariod) {
+    async UpdatePerfiles(Id_Perfil,Nombre_Completo) {
 
         try { 
             
             
             
-            const sql = "update Perfiles set Nombre=?,Prioridad=? where Id_Rol=?";
+            const sql = "update Perfiles set Nombre_Completo=? WHERE Id_Perfil=? AND disponible='SI'";
 
-            await this.DB.Open(sql, [Id_Perfil,Nombre_Completo,Email,Numero_De_Proyecto,Estado,Id_Usuariod]);
+            await this.DB.Open(sql, [Nombre_Completo,Id_Perfil]);
 
             return ('Actualizado Correctamente')
         }

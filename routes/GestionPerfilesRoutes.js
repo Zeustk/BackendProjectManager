@@ -40,9 +40,9 @@ module.exports = function (servicio) {
 
    router.put('/api/UpdatePerfiles', async (req, res) => {
 
-      const { Id_Perfil,Nombre_Completo,Email,Numero_De_Proyecto,Estado,Id_Usuario} = req.body
+      const { Id_Perfil,Nombre_Completo} = req.body
 
-      const updatePerfil = await servicio.UpdatePerfiles(Id_Perfil,Nombre_Completo,Email,Numero_De_Proyecto,Estado,Id_Usuario);
+      const updatePerfil = await servicio.UpdatePerfiles(Id_Perfil,Nombre_Completo);
 
 
       res.json(updatePerfil);
